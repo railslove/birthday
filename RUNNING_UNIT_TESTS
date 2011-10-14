@@ -1,0 +1,9 @@
+1. Pick Rails version.  Either dump this plugin in a Rails app and run it from there, or specify it as an ENV var:
+
+  RAILS=3.0.9 rspec spec/birthday_spec.rb
+
+2. Setup your database.  By default mysql is used, and no further setup is necessary.  You can pick any of the listed databases in test/database.yml.  Be sure to create the database first.
+
+  DB=postgres rspec spec/birthday_spec.rb
+
+3. Profit!!

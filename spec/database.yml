@@ -1,0 +1,12 @@
+mysql:
+  :adapter: mysql2
+  :host: localhost
+  :username: rails
+  :password:
+  :database: birthday_plugin_test
+postgres:
+  :adapter: postgresql
+  :username: postgres
+  :password: postgres
+  :database: birthday_plugin_test
+  :min_messages: ERROR
