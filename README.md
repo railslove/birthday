@@ -10,6 +10,14 @@ This is a small gem that hooks into ActiveRecord and allows to tag a database fi
 
 Will update readme as soon as possible. Until then, look into the self explanatory tests (and `schema.rb`)
 
+This gem is not release-ready yet.
+
+### To do
+
+* Test PostgreSQL
+* kick class_eval?
+* make tests more "aware" of environment
+
 ## Note on Patches/Pull Requests
 
 * Fork the project.
