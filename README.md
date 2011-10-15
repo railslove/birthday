@@ -4,11 +4,18 @@ This is a small gem that hooks into ActiveRecord and allows to tag a database fi
 
 ## How To Install
 
+After the gem has been properly tested, it will be released on RubyGems, and will be available to be installed with:
+
     gem install birthday
+
+
+Until then, you have to either clone a git repository and build the gem yourself, or add this line to your Gemfile:
+
+    gem 'birthday', :git => 'git://github.com/railslove/birthday.git'
 
 ## Synopsis
 
-Will update readme as soon as possible. Until then, look into the self explanatory tests (and `schema.rb`)
+Will update readme as soon as possible. Until then, look into the [self-explanatory tests](https://github.com/railslove/birthday/blob/master/spec/birthday_spec.rb) (and `schema.rb`)
 
 This gem is not release-ready yet.
 
