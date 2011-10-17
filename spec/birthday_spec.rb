@@ -8,10 +8,6 @@ class Marriage < ActiveRecord::Base
   acts_as_birthday :anniversary
 end
 
-class BirthdayTest < Test::Unit::TestCase
-
-end
-
 describe Marriage do
 
   before :each do

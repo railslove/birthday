@@ -16,9 +16,10 @@ module Railslove
             birthday_fields.each do |field|
               class_eval %{
                 #{scope_method} :find_#{field.to_s.pluralize}_for, lambda \{ |*args|
+                  raise ArgumentError if args.empty? or args.size > 2
                   date_start, date_end = args
                   date_start = date_start.to_date
-                  unless date_end
+                  if ((date_end.respond_to?(:empty?) && date_end.empty?) || !date_end)
                     where_sql = "DATE_FORMAT(`#{field}`, '%m%d') = \\"\#{date_start.strftime('%m%d')}\\""
                   else
                     date_end = date_end.to_date
@@ -39,9 +40,10 @@ module Railslove
             birthday_fields.each do |field|
               class_eval %{
                 #{scope_method} :find_#{field.to_s.pluralize}_for, lambda \{ |*args|
+                  raise ArgumentError if args.empty? or args.size > 2
                   date_start, date_end = args
                   date_start = date_start.to_date
-                  unless date_end
+                  if ((date_end.respond_to?(:empty?) && date_end.empty?) || !date_end)
                     where_sql = "to_char(\\"#{field}\\", 'MMDD') = '\#{date_start.strftime('%m%d')}'"
                   else
                     date_end = date_end.to_date
