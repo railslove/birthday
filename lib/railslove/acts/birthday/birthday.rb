@@ -9,11 +9,14 @@ module Railslove
       module ClassMethods
         def acts_as_birthday(*args)
           birthday_fields = args.to_a.flatten.compact.map(&:to_sym)
+          
+          scope_method = ActiveRecord::VERSION::MAJOR == 3 ? 'scope' : 'named_scope'
 
           if ["ActiveRecord::ConnectionAdapters::Mysql2Adapter","ActiveRecord::ConnectionAdapters::MysqlAdapter"].include?(ActiveRecord::Base.connection.class.name)
             birthday_fields.each do |field|
               class_eval %{
-                def self.find_#{field.to_s.pluralize}_for(date_start, date_end = nil)
+                #{scope_method} :find_#{field.to_s.pluralize}_for, lambda \{ |*args|
+                  date_start, date_end = args
                   date_start = date_start.to_date
                   unless date_end
                     where_sql = "DATE_FORMAT(`#{field}`, '%m%d') = \\"\#{date_start.strftime('%m%d')}\\""
@@ -28,14 +31,15 @@ module Railslove
                       where_sql = "DATE_FORMAT(`#{field}`, '%m%d') >= \\"\#{date_start.strftime('%m%d')}\\" AND DATE_FORMAT(`#{field}`, '%m%d') <= \\"\#{date_end.strftime('%m%d')}\\""
                     end
                   end
-                  self.find(:all, :conditions => where_sql)
-                end
+                  { :conditions => where_sql }
+                \}
               }
             end
           elsif ActiveRecord::Base.connection.class.name == "ActiveRecord::ConnectionAdapters::PostgreSQLAdapter"
             birthday_fields.each do |field|
               class_eval %{
-                def self.find_#{field.to_s.pluralize}_for(date_start, date_end = nil)
+                #{scope_method} :find_#{field.to_s.pluralize}_for, lambda \{ |*args|
+                  date_start, date_end = args
                   date_start = date_start.to_date
                   unless date_end
                     where_sql = "to_char(\\"#{field}\\", 'MMDD') = '\#{date_start.strftime('%m%d')}'"
@@ -48,8 +52,8 @@ module Railslove
                       where_sql = "to_char(\\"#{field}\\", 'MMDD') BETWEEN '\#{date_start.strftime('%m%d')}' AND '\#{date_end.strftime('%m%d')}'"
                     end
                   end
-                  self.find(:all, :conditions => where_sql)
-                end
+                  { :conditions => where_sql }
+                \}
               }
             end
           else
