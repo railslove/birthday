@@ -28,7 +28,7 @@ module Railslove
                       where_sql = "DATE_FORMAT(`#{field}`, '%m%d') >= \\"\#{date_start.strftime('%m%d')}\\" AND DATE_FORMAT(`#{field}`, '%m%d') <= \\"\#{date_end.strftime('%m%d')}\\""
                     end
                   end
-                  self.where(where_sql)
+                  self.find(:all, :conditions => where_sql)
                 end
               }
             end
@@ -48,7 +48,7 @@ module Railslove
                       where_sql = "to_char(\\"#{field}\\", 'MMDD') BETWEEN '\#{date_start.strftime('%m%d')}' AND '\#{date_end.strftime('%m%d')}'"
                     end
                   end
-                  self.where(where_sql)
+                  self.find(:all, :conditions => where_sql)
                 end
               }
             end
