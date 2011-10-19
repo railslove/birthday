@@ -4,7 +4,7 @@ module Railslove
     module Birthday #:nodoc:
       module Adapters
         class PostgreSQLAdapter
-          def initialize(field, date_start, date_end)
+          def self.scope_hash(field, date_start, date_end)
             date_start = date_start.to_date
             if ((date_end.respond_to?(:empty?) && date_end.empty?) || !date_end)
               where_sql = "to_char(\"#{field}\", 'MMDD') = '#{date_start.strftime('%m%d')}'"

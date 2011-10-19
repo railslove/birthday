@@ -7,15 +7,14 @@ module Railslove
       end
 
       module ClassMethods
-        attr_accessor :_birthday_backend
 
         def acts_as_birthday(*args)
           args = args.to_a.flatten.compact
           klass = args.shift if args.first.class == Class
           if klass && klass.class == Class
-            @_birthday_backend = klass
+            @@_birthday_backend = klass
           else
-            @_birthday_backend ||= "Railslove::Acts::Birthday::Adapters::#{ActiveRecord::Base.connection.class.name.split("::").last}".constantize
+            @@_birthday_backend ||= "Railslove::Acts::Birthday::Adapters::#{ActiveRecord::Base.connection.class.name.split("::").last}".constantize
           end
           puts self.inspect
           
@@ -23,12 +22,11 @@ module Railslove
 
           scope_method = ActiveRecord::VERSION::MAJOR == 3 ? 'scope' : 'named_scope'
 
-          self.send(scope_method, :_birthday) do |*scope_args|
-            puts self.inspect
+          self.send(scope_method, :_birthday, lambda do |*scope_args|
             raise ArgumentError if scope_args.empty? or scope_args.size > 3
             field, date_start, date_end = scope_args
-            @_birthday_backend.new(field, date_start, date_end)
-          end
+            @@_birthday_backend.scope_hash(field, date_start, date_end)
+          end)
 
           birthday_fields.each do |field|
             self.send(scope_method, :"find_#{field.to_s.pluralize}_for", lambda{ |*specific_scope_args| _birthday(field, *specific_scope_args) })
