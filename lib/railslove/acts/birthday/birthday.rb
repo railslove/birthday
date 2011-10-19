@@ -8,6 +8,31 @@ module Railslove
 
       module ClassMethods
 
+        # Expects an array of date or datetime fields. If the first object
+        # in passed array is a class with a class method `scope_hash`
+        #   class SqliteAdapter
+        #     def self.scope_hash(field, date_start, date_end)
+        #       # do some magic and return scope hash you can use
+        #     end
+        #   end
+        # 
+        # then this class is used as an adapter to create its scope for birthday finders.
+        #
+        # An example code in basic model would be:
+        #
+        #   class Person < ActiveRecord::Base
+        #     acts_as_birthday :birthday, :created_at
+        #   end
+        #
+        # This will create scopes:
+        #   Person.find_birthdays_for
+        #   Person.find_created_ats_for
+        # and instance methods:
+        #   person = Person.find(1)
+        #   person.birthday_age => 34
+        #   person.birthday_today? => true/false
+        #   person.created_at_age => 2
+        #   person.created_at_today? => true/false
         def acts_as_birthday(*args)
           args = args.to_a.flatten.compact
           klass = args.shift if args.first.class == Class
@@ -16,7 +41,6 @@ module Railslove
           else
             @@_birthday_backend ||= "Railslove::Acts::Birthday::Adapters::#{ActiveRecord::Base.connection.class.name.split("::").last}".constantize
           end
-          puts self.inspect
           
           birthday_fields = args.map(&:to_sym)
 
