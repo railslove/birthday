@@ -33,13 +33,15 @@ adapter = ENV['DB'] || 'mysql'
 case adapter
 when 'mysql'
   require 'mysql2'
+when 'postgres'
+  require 'pg'
 else
   require adapter
 end
 
 ActiveRecord::Base.configurations.update config
-#ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
-ActiveRecord::Base.establish_connection(config[adapter])
+ActiveRecord::Base.establish_connection(adapter)
+ActiveRecord::Base.default_timezone = :utc
 
 load(File.dirname(__FILE__) + "/schema.rb")
 

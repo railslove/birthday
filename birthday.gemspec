@@ -19,9 +19,11 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
+  s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
-  s.add_development_dependency "mysql2", '< 0.3'
+  s.add_development_dependency "mysql2", '0.3.6'
   s.add_development_dependency "delorean"
+  s.add_development_dependency "pg"
   s.add_runtime_dependency "activerecord"
   s.add_runtime_dependency "activesupport"
 end

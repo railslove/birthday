@@ -1,0 +1,13 @@
+rvm:
+  - 1.8.7 # (current default)
+  - 1.9.2
+before_script:
+  - "psql -c 'create database birthday_plugin_test;' -U postgres"
+  - "mysql -e 'create database birthday_plugin_test;'"
+  - "gem install rails -v 3.0.9"
+  - "gem install rails -v 2.3.8"
+env:
+  - DB=mysql RAILS=3.0.9
+  - DB=postgres RAILS=3.0.9
+  - DB=mysql RAILS=2.3.8
+  - DB=postgres RAILS=2.3.8
