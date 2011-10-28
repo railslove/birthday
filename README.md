@@ -8,16 +8,9 @@ After the gem has been properly tested, it will be released on RubyGems, and wil
 
     gem install birthday
 
-
-Until then, you have to either clone a git repository and build the gem yourself, or add this line to your Gemfile:
-
-    gem 'birthday', :git => 'git://github.com/railslove/birthday.git'
-
 ## Synopsis
 
-Will update readme as soon as possible. Until then, look into the [self-explanatory tests](https://github.com/railslove/birthday/blob/master/spec/birthday_spec.rb) (and `schema.rb`)
-
-This gem is not release-ready yet.
+Read [a blog post about the gem](http://blog.railslove.com/2011/10/17/birthday-gem-easy-anniversaries-handling-ruby/) at Railslove blog to get a comprehensive guide to usage of this gem.
 
 ### To do
 
@@ -36,7 +29,11 @@ This gem is not release-ready yet.
 
 ## Copyright
 
-Copyright (c) 2011 Mike Połtyn
+Copyright (c) 2011 Railslove
+
+## Main contributors
+
+* [@Holek (Mike Połtyn)](http://github.com/Holek)
 
 ## License
 
