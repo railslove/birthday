@@ -14,9 +14,7 @@ Read [a blog post about the gem](http://blog.railslove.com/2011/10/17/birthday-g
 
 ### To do
 
-* Test PostgreSQL
 * kick class_eval?
-* make tests more "aware" of environment
 
 ## Note on Patches/Pull Requests
 
