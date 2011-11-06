@@ -22,7 +22,7 @@ You can create your own adapters for the ORM adapters we're not supporting yet b
 
 and then create an initializer file with this content, referencing the class you wrote:
 
-    Railslove::Acts::Birthday.adapter = SqliteAdapter
+    ::Railslove::Acts::Birthday::BaseAdapter.birthday_adapter = SqliteAdapter
 
 ### To do
 

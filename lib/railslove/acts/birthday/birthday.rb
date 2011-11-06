@@ -3,15 +3,21 @@ module Railslove
   module Acts #:nodoc:
     module Birthday #:nodoc:
 
+      class BaseAdapter
+        def self.birthday_adapter
+          @@birthday_adapter
+        end
+
+        def self.birthday_adapter=(value)
+          @@birthday_adapter = value
+        end
+      end
+
       def self.included(base)
         base.extend ClassMethods
       end
 
       module ClassMethods
-
-        def birthday_adapter
-          @birthday_adapter ||= "Railslove::Acts::Birthday::Adapters::#{ActiveRecord::Base.connection.class.name.split("::").last}".constantize
-        end
 
         # Expects an array of date or datetime fields.
         # An example code in basic model would be:
@@ -38,7 +44,7 @@ module Railslove
             self.send(scope_method, :"find_#{field.to_s.pluralize}_for", lambda{ |*scope_args|
               raise ArgumentError if scope_args.empty? or scope_args.size > 2
               date_start, date_end = *scope_args
-              self.birthday_adapter.scope_hash(field, date_start, date_end)
+              ::Railslove::Acts::Birthday::BaseAdapter.birthday_adapter.scope_hash(field, date_start, date_end)
             })
 
             class_eval %{
