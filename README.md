@@ -17,6 +17,8 @@ You can create your own adapters for the ORM adapters we're not supporting yet b
     class SqliteAdapter
       def self.scope_hash(field, date_start, date_end)
         # do some magic and return scope hash you can use
+        # field is the field used in the database
+        # date_start and date_end can be anything that responds to .to_date method
       end
     end
 
@@ -26,7 +28,6 @@ and then create an initializer file with this content, referencing the class you
 
 ### To do
 
-* Test PostgreSQL
 * kick class_eval?
 * make tests more "aware" of environment
 
