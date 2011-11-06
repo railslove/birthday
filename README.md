@@ -1,4 +1,4 @@
-# Birthday
+# Birthday [![Build Status](https://secure.travis-ci.org/railslove/birthday.png)](http://travis-ci.org/railslove/birthday)
 
 This is a small gem that hooks into ActiveRecord and allows to tag a database field (date or datetime) as birthday, allowing to find birthdays with ease.
 
@@ -29,7 +29,6 @@ and then create an initializer file with this content, referencing the class you
 ### To do
 
 * kick class_eval?
-* make tests more "aware" of environment
 
 ## Note on Patches/Pull Requests
 
