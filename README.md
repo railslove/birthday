@@ -12,6 +12,18 @@ After the gem has been properly tested, it will be released on RubyGems, and wil
 
 Read [a blog post about the gem](http://blog.railslove.com/2011/10/17/birthday-gem-easy-anniversaries-handling-ruby/) at Railslove blog to get a comprehensive guide to usage of this gem.
 
+You can create your own adapters for the ORM adapters we're not supporting yet by writing a class with a class method `scope_hash`, which will return a hash normally used in `active_record` scopes.
+
+    class SqliteAdapter
+      def self.scope_hash(field, date_start, date_end)
+        # do some magic and return scope hash you can use
+      end
+    end
+
+and then create an initializer file with this content, referencing the class you wrote:
+
+    Railslove::Acts::Birthday.adapter = SqliteAdapter
+
 ### To do
 
 * Test PostgreSQL

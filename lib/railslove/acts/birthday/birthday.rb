@@ -2,22 +2,18 @@
 module Railslove
   module Acts #:nodoc:
     module Birthday #:nodoc:
+
       def self.included(base)
         base.extend ClassMethods
       end
 
       module ClassMethods
 
-        # Expects an array of date or datetime fields. If the first object
-        # in passed array is a class with a class method `scope_hash`
-        #   class SqliteAdapter
-        #     def self.scope_hash(field, date_start, date_end)
-        #       # do some magic and return scope hash you can use
-        #     end
-        #   end
-        # 
-        # then this class is used as an adapter to create its scope for birthday finders.
-        #
+        def birthday_adapter
+          @birthday_adapter ||= "Railslove::Acts::Birthday::Adapters::#{ActiveRecord::Base.connection.class.name.split("::").last}".constantize
+        end
+
+        # Expects an array of date or datetime fields.
         # An example code in basic model would be:
         #
         #   class Person < ActiveRecord::Base
@@ -34,15 +30,7 @@ module Railslove
         #   person.created_at_age => 2
         #   person.created_at_today? => true/false
         def acts_as_birthday(*args)
-          args = args.to_a.flatten.compact
-          klass = args.shift if args.first.class == Class
-          if klass && klass.class == Class
-            @@_birthday_backend = klass
-          else
-            @@_birthday_backend ||= "Railslove::Acts::Birthday::Adapters::#{ActiveRecord::Base.connection.class.name.split("::").last}".constantize
-          end
-          
-          birthday_fields = args.map(&:to_sym)
+          birthday_fields = args.to_a.flatten.compact.map(&:to_sym)
 
           scope_method = ActiveRecord::VERSION::MAJOR == 3 ? 'scope' : 'named_scope'
 
@@ -50,7 +38,7 @@ module Railslove
             self.send(scope_method, :"find_#{field.to_s.pluralize}_for", lambda{ |*scope_args|
               raise ArgumentError if scope_args.empty? or scope_args.size > 2
               date_start, date_end = *scope_args
-              @@_birthday_backend.scope_hash(field, date_start, date_end)
+              self.birthday_adapter.scope_hash(field, date_start, date_end)
             })
 
             class_eval %{

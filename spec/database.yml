@@ -1,5 +1,5 @@
 mysql:
-  adapter: mysql2
+  adapter: mysql
   database: birthday_plugin_test
   username: 
   encoding: utf8
