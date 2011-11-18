@@ -10,7 +10,7 @@ After the gem has been properly tested, it will be released on RubyGems, and wil
 
 or in your Gemfile:
 
-    gem 'birthday', '~> 0.0.2'
+    gem 'birthday', '~> 0.1.0'
 
 ## Synopsis
 
