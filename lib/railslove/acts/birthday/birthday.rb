@@ -3,16 +3,6 @@ module Railslove
   module Acts #:nodoc:
     module Birthday #:nodoc:
 
-      class BaseAdapter
-        def self.birthday_adapter
-          @@birthday_adapter
-        end
-
-        def self.birthday_adapter=(value)
-          @@birthday_adapter = value
-        end
-      end
-
       def self.included(base)
         base.extend ClassMethods
       end
@@ -35,8 +25,7 @@ module Railslove
         #   person.birthday_today? => true/false
         #   person.created_at_age => 2
         #   person.created_at_today? => true/false
-        def acts_as_birthday(*args)
-          birthday_fields = args.to_a.flatten.compact.map(&:to_sym)
+        def acts_as_birthday(*birthday_fields)
 
           scope_method = ActiveRecord::VERSION::MAJOR == 3 ? 'scope' : 'named_scope'
 
@@ -44,7 +33,7 @@ module Railslove
             self.send(scope_method, :"find_#{field.to_s.pluralize}_for", lambda{ |*scope_args|
               raise ArgumentError if scope_args.empty? or scope_args.size > 2
               date_start, date_end = *scope_args
-              ::Railslove::Acts::Birthday::BaseAdapter.birthday_adapter.scope_hash(field, date_start, date_end)
+              ::Railslove::Acts::Birthday::BaseAdapter.adapter_for(self.connection).scope_hash(field, date_start, date_end)
             })
 
             class_eval %{
