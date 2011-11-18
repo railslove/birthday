@@ -8,23 +8,33 @@ After the gem has been properly tested, it will be released on RubyGems, and wil
 
     gem install birthday
 
+or in your Gemfile:
+
+    gem 'birthday', '~> 0.1.0'
+
 ## Synopsis
 
 Read [a blog post about the gem](http://blog.railslove.com/2011/10/17/birthday-gem-easy-anniversaries-handling-ruby/) at Railslove blog to get a comprehensive guide to usage of this gem.
 
 You can create your own adapters for the ORM adapters we're not supporting yet by writing a class with a class method `scope_hash`, which will return a hash normally used in `active_record` scopes.
 
-    class SqliteAdapter
-      def self.scope_hash(field, date_start, date_end)
-        # do some magic and return scope hash you can use
-        # field is the field used in the database
-        # date_start and date_end can be anything that responds to .to_date method
+    module Railslove
+      module Acts
+        module Birthday
+          module Adapter
+            class SqliteAdapter
+              def self.scope_hash(field, date_start, date_end)
+                # do some magic and return scope hash you can use
+                # field is the field used in the database
+                # date_start and date_end can be anything that responds to .to_date method
+              end
+            end
+          end
+        end
       end
     end
 
-and then create an initializer file with this content, referencing the class you wrote:
-
-    ::Railslove::Acts::Birthday::BaseAdapter.birthday_adapter = SqliteAdapter
+With this namespacing (`Railslove::Acts::Birthday::Adapter`) and naming the class after `active_record`'s ORM adapter (like `SqliteAdapter` in the example above) you can automatically use your own adapters with this gem.
 
 ### To do
 
@@ -46,6 +56,7 @@ Copyright (c) 2011 Railslove
 ## Main contributors
 
 * [@Holek (Mike Połtyn)](http://github.com/Holek)
+* [@Bumi (Michael Bumann)](http://github.com/bumi)
 
 ## License
 
