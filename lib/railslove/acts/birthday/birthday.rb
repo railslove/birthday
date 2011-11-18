@@ -33,7 +33,7 @@ module Railslove
             self.send(scope_method, :"find_#{field.to_s.pluralize}_for", lambda{ |*scope_args|
               raise ArgumentError if scope_args.empty? or scope_args.size > 2
               date_start, date_end = *scope_args
-              ::Railslove::Acts::Birthday::BaseAdapter.adapter_for(self.connection).scope_hash(field, date_start, date_end)
+              ::Railslove::Acts::Birthday::Adapter.adapter_for(self.connection).scope_hash(field, date_start, date_end)
             })
 
             class_eval %{

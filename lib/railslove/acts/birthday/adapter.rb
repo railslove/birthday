@@ -3,9 +3,9 @@ module Railslove
   module Acts #:nodoc:
     module Birthday #:nodoc:
       module Adapter
-        autoload MysqlAdapter
-        autoload Mysql2Adapter
-        autoload PostgreSQLAdapter
+        autoload :MysqlAdapter, 'railslove/acts/birthday/adapter/mysql_adapter'
+        autoload :Mysql2Adapter, 'railslove/acts/birthday/adapter/mysql2_adapter'
+        autoload :PostgreSQLAdapter, 'railslove/acts/birthday/adapter/postgresql_adapter'
 
         def self.adapter_for(connection)
           "Railslove::Acts::Birthday::Adapter::#{connection.class.name.demodulize}".constantize

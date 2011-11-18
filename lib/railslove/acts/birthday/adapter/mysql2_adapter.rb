@@ -1,4 +1,5 @@
 # Birthday
+require 'railslove/acts/birthday/adapter/mysql_adapter'
 module Railslove
   module Acts #:nodoc:
     module Birthday #:nodoc:
