@@ -2,6 +2,7 @@
 module Railslove
   module Acts #:nodoc:
     module Birthday #:nodoc:
+      autoload :Adapter, 'railslove/acts/birthday/adapter'
 
       def self.included(base)
         base.extend ClassMethods
