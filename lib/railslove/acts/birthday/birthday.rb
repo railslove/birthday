@@ -37,6 +37,8 @@ module Railslove
               ::Railslove::Acts::Birthday::Adapter.adapter_for(self.connection).scope_hash(field, date_start, date_end)
             })
 
+            self.send(scope_method, :"#{field.to_s}_today", lambda{ self.send(:"find_#{field.to_s.pluralize}_for", Date.today) })
+
             class_eval %{
               def #{field}_age
                 return nil unless self.#{field}?

@@ -17,9 +17,9 @@ or add this line to your Gemfile:
 After installing this gem, you are able to work with anniversaries, such as birthdays in such a manner:
 
     class User < ActiveRecord::Base
-    
+
       acts_as_birthday :birthday
-    
+
     end
 
 Add `acts_as_birthday :field_name` to your ActiveRecord model (or symbols for multiple fields, if you need to), and right away you can access methods:
@@ -37,9 +37,15 @@ it will automatically create methods: `birthday_age`, `birthday_today?`, `annive
 
 ### Created scopes
 
-On top of that you get useful scopes: `find_birthdays_for`, `find_anniversaries_for` and `find_something_elses_for`.
+On top of that you get useful scopes: `birthday_today`, `find_birthdays_for`, `anniversary_today`, `find_anniversaries_for`, `something_else_today`, and `find_something_elses_for`.
 
 These scopes accept maximum of two parameters, which have to respond to method `to_date` (by default objects of class Date, Time and DateTime). Thanks to these now you can search for birthdays...
+
+* today:
+
+        # Let's say today is April 24th:
+        > User.birthday_today
+         => [#<User id: 56, birthday: "1976-04-24">]
 
 * on a specific date:
 
@@ -60,15 +66,15 @@ These scopes accept maximum of two parameters, which have to respond to method `
 Since all these are essentially scopes, there's nothing stopping you from chaining them with other scopes:
 
     class User < ActiveRecord::Base
-    
+
       acts_as_birthday :birthday
-    
+
       scope :admins, {:is_admin => true}
       scope :named_like, lambda { |name| { :conditions => [ "first_name LIKE :q OR email LIKE :q OR last_name LIKE :q", { :q => "%#{name}%" } ] } }
-    
+
     end
-    
-    
+
+
     > User.admins.named_like("Mike").find_birthdays_for(Date.parse('12-12-2000'), Date.parse('03-01-2001'))
 
 ### Your own adapters

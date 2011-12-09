@@ -30,10 +30,17 @@ describe Marriage do
     @m1.anniversary_age.should eq(1)
     @m2.anniversary_age.should eq(2)
   end
-  
+
   it 'finds people\'s by anniversary date' do
     time_travel_to Date.parse('2011-08-08')
     anniversaries_today = Marriage.find_anniversaries_for(Date.today)
+    anniversaries_today.should_not include(@m1)
+    anniversaries_today.should include(@m2)
+  end
+
+  it 'finds people\'s by anniversary date - dumb scope' do
+    time_travel_to Date.parse('2011-08-08')
+    anniversaries_today = Marriage.anniversary_today
     anniversaries_today.should_not include(@m1)
     anniversaries_today.should include(@m2)
   end
@@ -73,10 +80,17 @@ describe Person do
     @p1.birthday_age.should eq(4)
     @p2.birthday_age.should eq(7)
   end
-  
+
   it 'finds people\'s by birthday date' do
     time_travel_to Date.parse('2011-08-08')
     birthdays_today = Person.find_birthdays_for(Date.today)
+    birthdays_today.should_not include(@p1)
+    birthdays_today.should include(@p2)
+  end
+
+  it 'finds people\'s by birthday date - dumb scope' do
+    time_travel_to Date.parse('2011-08-08')
+    birthdays_today = Person.birthday_today
     birthdays_today.should_not include(@p1)
     birthdays_today.should include(@p2)
   end
