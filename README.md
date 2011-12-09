@@ -10,7 +10,7 @@ To install this gem, fire this command from your terminal:
 
 or add this line to your Gemfile:
 
-    gem 'birthday', '~> 0.1.1'
+    gem 'birthday', '~> 0.2.0'
 
 ## Synopsis
 
