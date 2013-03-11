@@ -5,3 +5,4 @@ pkg/*
 .rvmrc
 .DS_Store
 spec/debug.log
+.idea/*
