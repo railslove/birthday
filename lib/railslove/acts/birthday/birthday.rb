@@ -28,7 +28,7 @@ module Railslove
         #   person.created_at_today? => true/false
         def acts_as_birthday(*birthday_fields)
 
-          scope_method = ActiveRecord::VERSION::MAJOR == 3 ? 'scope' : 'named_scope'
+          scope_method = ActiveRecord::VERSION::MAJOR >= 3 ? 'scope' : 'named_scope'
 
           birthday_fields.each do |field|
             self.send(scope_method, :"find_#{field.to_s.pluralize}_for", lambda{ |*scope_args|
