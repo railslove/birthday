@@ -28,13 +28,13 @@ module Railslove
         #   person.created_at_today? => true/false
         def acts_as_birthday(*birthday_fields)
 
-          scope_method = ActiveRecord::VERSION::MAJOR == 3 ? 'scope' : 'named_scope'
+          scope_method = ActiveRecord::VERSION::MAJOR >= 3 ? 'scope' : 'named_scope'
 
           birthday_fields.each do |field|
             self.send(scope_method, :"find_#{field.to_s.pluralize}_for", lambda{ |*scope_args|
               raise ArgumentError if scope_args.empty? or scope_args.size > 2
               date_start, date_end = *scope_args
-              ::Railslove::Acts::Birthday::Adapter.adapter_for(self.connection).scope_hash(field, date_start, date_end)
+              where ::Railslove::Acts::Birthday::Adapter.adapter_for(self.connection).scope_hash(field, date_start, date_end)[:conditions]
             })
 
             self.send(scope_method, :"#{field.to_s}_today", lambda{ self.send(:"find_#{field.to_s.pluralize}_for", Date.today) })
