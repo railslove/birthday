@@ -7,3 +7,8 @@ postgres:
   adapter: postgresql
   database: birthday_plugin_test
   username: postgres
+sqlite:
+  adapter: sqlite3
+  database: db/birthday_plugin_test.sqlite3
+  pool: 5
+  timeout: 5000

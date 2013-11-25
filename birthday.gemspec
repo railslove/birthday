@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "mysql"
   s.add_development_dependency "delorean"
   s.add_development_dependency "pg"
+  s.add_development_dependency "sqlite3"
   s.add_runtime_dependency "activerecord"
   s.add_runtime_dependency "activesupport"
 end

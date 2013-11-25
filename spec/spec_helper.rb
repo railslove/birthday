@@ -7,12 +7,14 @@ require 'delorean'
 require 'yaml'
 
 config = YAML::load(IO.read(File.dirname(__FILE__) + '/database.yml'))
-adapter = ENV['DB'] || 'mysql'
+adapter = ENV['DB'] || 'sqlite'
 case adapter
 when 'mysql'
   require 'mysql2'
 when 'postgres'
   require 'pg'
+when 'sqlite'
+  require 'sqlite3'
 else
   require adapter
 end
