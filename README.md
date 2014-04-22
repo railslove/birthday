@@ -1,6 +1,6 @@
 # Birthday [![Build Status](https://secure.travis-ci.org/railslove/birthday.png)](http://travis-ci.org/railslove/birthday)
 
-This is a small gem that hooks into ActiveRecord and allows to tag a database field (date or datetime) as birthday, allowing to find birthdays with ease.
+This is a small gem that hooks into ActiveRecord and allows to tag a database field (date or datetime) as birthday, allowing to find birthdays with ease. This link is a blog post describing its implementation- The one lines above results in a 404. http://railslove.com/blog/2011/10/17/birthday-gem-easy-anniversaries-handling-ruby/
 
 ## How To Install
 
