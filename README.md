@@ -1,6 +1,6 @@
 # Birthday [![Build Status](https://secure.travis-ci.org/railslove/birthday.png)](http://travis-ci.org/railslove/birthday)
 
-This is a small gem that hooks into ActiveRecord and allows to tag a database field (date or datetime) as birthday, allowing to find birthdays with ease. This is currently NOT compatible with Rails 4.
+This is a small gem that hooks into ActiveRecord and allows to tag a database field (date or datetime) as birthday, allowing to find birthdays with ease. 
 
 ## How To Install
 
@@ -10,7 +10,7 @@ To install this gem, fire this command from your terminal:
 
 or add this line to your Gemfile:
 
-    gem 'birthday', '~> 0.2.0'
+    gem 'birthday', '~> 0.3.0'
 
 ## Synopsis
 
@@ -79,7 +79,7 @@ Since all these are essentially scopes, there's nothing stopping you from chaini
 
 ### Your own adapters
 
-At this moment, this gem supports only MySQL and PostgreSQL databases. If you want to support another type of database (perhaps SQLite), you can write your own adapter.
+At this moment, this gem supports MySQL, PostgreSQL and SQLite databases. If you want to support another type of database, you can write your own adapter.
 
 You can create your own birthday adapters for the ORM adapters we're not supporting yet by writing a class with a class method `scope_hash`, which will return a hash normally used in `active_record` scopes.
 
