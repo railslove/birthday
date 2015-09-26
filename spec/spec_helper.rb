@@ -27,7 +27,7 @@ else
   require 'active_record'
   require 'active_support'
   ActiveRecord::Base.configurations.update config
-  ActiveRecord::Base.establish_connection(adapter)
+  ActiveRecord::Base.establish_connection(adapter.to_sym)
   ActiveRecord::Base.default_timezone = :utc
   $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
   Dir["#{$LOAD_PATH.last}/**/*.rb"].each do |path|
