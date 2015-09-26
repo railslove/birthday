@@ -11,8 +11,8 @@ module Railslove
               date_end = date_end.to_date
               if date_end.strftime('%m%d') < date_start.strftime('%m%d')
                 where_sql = "(strftime('%m%d', `#{field}`) >= \"0101\""
-                where_sql << " AND strftime('%m%d', `#{field}`) <= \"#{date_start.strftime('%m%d')}\")"
-                where_sql << " OR (strftime('%m%d', `#{field}`) >= \"#{date_end.strftime('%m%d')}\""
+                where_sql << " AND strftime('%m%d', `#{field}`) <= \"#{date_end.strftime('%m%d')}\")"
+                where_sql << " OR (strftime('%m%d', `#{field}`) >= \"#{date_start.strftime('%m%d')}\""
                 where_sql << " AND strftime('%m%d', `#{field}`) <= \"1231\")"
               else
                 where_sql = "strftime('%m%d', `#{field}`) >= \"#{date_start.strftime('%m%d')}\" AND strftime('%m%d', `#{field}`) <= \"#{date_end.strftime('%m%d')}\""
