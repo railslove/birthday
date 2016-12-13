@@ -31,7 +31,8 @@ module Railslove
           scope_method = ActiveRecord::VERSION::MAJOR >= 3 ? 'scope' : 'named_scope'
 
           birthday_fields.each do |field|
-            name, field = field.is_a?(Hash) ? field.keys.first, field.values.first : field, field
+            name, field = field, field
+            name, field = field.keys.first, field.values.first if field.is_a?(Hash)
             self.send(scope_method, :"find_#{name.to_s.pluralize}_for", lambda{ |*scope_args|
               raise ArgumentError if scope_args.empty? or scope_args.size > 2
               date_start, date_end = *scope_args
