@@ -6,6 +6,7 @@ module Railslove
         autoload :MysqlAdapter, 'railslove/acts/birthday/adapter/mysql_adapter'
         autoload :Mysql2Adapter, 'railslove/acts/birthday/adapter/mysql2_adapter'
         autoload :PostgreSQLAdapter, 'railslove/acts/birthday/adapter/postgresql_adapter'
+        autoload :MakaraPostgreSQLAdapter, 'railslove/acts/birthday/adapter/makara_postgresql_adapter'
         autoload :SQLite3Adapter, 'railslove/acts/birthday/adapter/sqlite3_adapter'
 
         def self.adapter_for(connection)
