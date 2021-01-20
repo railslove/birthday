@@ -7,8 +7,9 @@ metadata:
     github.com/project-slug: kented/birthday
   tags:
     - ruby
+    - gem
 spec:
-  type: gem
-  lifecycle: unknown
+  type: library
+  lifecycle: production
   owner: kented
   system: inside.ted.com
