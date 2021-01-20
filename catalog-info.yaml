@@ -1,0 +1,10 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: birthday
+  annotations:
+    github.com/project-slug: kented/birthday
+spec:
+  type: other
+  lifecycle: unknown
