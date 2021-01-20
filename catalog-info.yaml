@@ -11,5 +11,5 @@ metadata:
 spec:
   type: library
   lifecycle: production
-  owner: kented
+  owner: ken.hill
   system: inside.ted.com
