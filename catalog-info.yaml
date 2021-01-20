@@ -5,6 +5,10 @@ metadata:
   name: birthday
   annotations:
     github.com/project-slug: kented/birthday
+  tags:
+    - ruby
 spec:
-  type: other
+  type: gem
   lifecycle: unknown
+  owner: kented
+  system: inside.ted.com
