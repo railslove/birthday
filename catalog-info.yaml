@@ -11,5 +11,5 @@ metadata:
 spec:
   type: library
   lifecycle: production
-  owner: initiative-support-group
+  owner: user:ken.hill
   system: inside.ted.com
