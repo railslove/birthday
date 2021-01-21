@@ -1,0 +1,15 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: birthday
+  annotations:
+    github.com/project-slug: kented/birthday
+  tags:
+    - ruby
+    - gem
+spec:
+  type: library
+  lifecycle: production
+  owner: user:ken.hill
+  system: inside.ted.com
